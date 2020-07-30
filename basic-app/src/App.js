@@ -1,26 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // creating a new state name counter and setCounter function
+    // This useState function is called a hook in the react world.
+    const [counter, setCounter] = useState(5);
+    return (
+        // Event Handling and using arrow function syntax
+        <div>
+            <h3>Count Example for hook:</h3>
+            <p>Explanation: Here, a new state counter is used to pass input value.
+                useState function acts as a hook which will update the value (make it reactive)</p>
+            <button onClick={() => setCounter(counter + counter)}> {counter} </button>
+        </div>
+    );
 }
 
 export default App;
