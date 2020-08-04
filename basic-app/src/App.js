@@ -1,6 +1,14 @@
 import React, {useState} from 'react';
 import './App.css';
 
+
+const testData = [
+    {name: "Dan Abramov", avatar_url: "https://avatars0.githubusercontent.com/u/810438?v=4", company: "@facebook"},
+    {name: "Sophie Alpert", avatar_url: "https://avatars2.githubusercontent.com/u/6820?v=4", company: "Humu"},
+    {name: "Sebastian Markbåge", avatar_url: "https://avatars2.githubusercontent.com/u/63648?v=4", company: "Facebook"},
+];
+
+
 //using props to input data (pass from parent to child)
 function Button(props) {
     // creating a new state name counter and setCounter function
@@ -13,11 +21,23 @@ function Button(props) {
 
 }
 
+const CardList = (props) => (
+    //pass the data using spread
+    <div className="profile" style={{margin: '1rem'}}>
+        <h3>User Profile Info Detail</h3>
+        {testData.map(profile => <Card {...profile}/>)}
+    </div>
+)
+
 class Card extends React.Component {
     render() {
+        const profile = this.props;
         return (
-            <div className="github-profile">
-                User Profile..
+            <div className='info' style={{marginLeft: 10}}>
+                {/*<img src={require('../src/assets/image/download.png')} alt=''/>*/}
+                <img src={profile.avatar_url} alt=''/>
+                <div className='name' style={{fontSize: '125%'}}>{profile.name}</div>
+                <div className='company'>{profile.company}</div>
             </div>
         )
     }
@@ -42,7 +62,7 @@ function App({title}) {
             <Button onClickFunction={incrementCounter} increment={100}/>
             <Display message={counter}/>
             <h1 className="header">{title}</h1>
-            <Card />
+            <CardList/>
         </div>
         // We can also use a special object to enclose multiple elements without introducing a new div parent which is
         //react.fragment but no new DOM parent will be introduced
