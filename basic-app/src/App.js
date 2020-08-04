@@ -5,31 +5,44 @@ import './App.css';
 function Button(props) {
     // creating a new state name counter and setCounter function
     // This useState function is called a hook in the react world.
-
-    // const handleClick = () => setCounter(counter + 1);
     //() => setCounter(counter + counter) arrow function example
+    const handleClick = () => props.onClickFunction(props.increment);
     return (
-        <div>
-            <h3>Count Example for hook:</h3>
-            <p>Explanation: Here, a new state counter is used to pass input value.
-                useState function acts as a hook which will update the value (make it reactive)</p>
-            <button onClick={props.onClickFunction}> +1 </button>
-        </div>
+        <button onClick={handleClick}> Increment by +{props.increment}</button>
     )
 
 }
 
+class Card extends React.Component {
+    render() {
+        return (
+            <div className="github-profile">
+                User Profile..
+            </div>
+        )
+    }
+}
+
 //Parent Component
-function App() {
-    const [counter, setCounter] = useState(5);
-    const incrementCounter = () => setCounter(counter + 1);
+function App({title}) {
+    const [counter, setCounter] = useState(0);
+    const incrementCounter = (incrementValue) => setCounter(counter + incrementValue);
     return (
         // Event Handling and using arrow function syntax, don't use long lines as it's hard to read
         // There are three ways to declare multiple elements
         // [<Button />, <Display />]
+        //Component Re usability using props and passing argument in function
         <div>
-            <Button onClickFunction={incrementCounter}/>
+            <h3>Count Example for hook:</h3>
+            <p>Explanation: Here, a new state counter is used to pass input value.
+                useState function acts as a hook which will update the value (make it reactive)</p>
+            <Button onClickFunction={incrementCounter} increment={1}/>
+            <Button onClickFunction={incrementCounter} increment={5}/>
+            <Button onClickFunction={incrementCounter} increment={10}/>
+            <Button onClickFunction={incrementCounter} increment={100}/>
             <Display message={counter}/>
+            <h1 className="header">{title}</h1>
+            <Card />
         </div>
         // We can also use a special object to enclose multiple elements without introducing a new div parent which is
         //react.fragment but no new DOM parent will be introduced
@@ -43,7 +56,9 @@ function App() {
 //for display purpose (presentational one only) without any stateful hook
 function Display(props) {
     return (
-        <div><h4>The total count is : </h4>{props.message}</div>
+        <div>
+            <h4>The total clicked count is : </h4>{props.message}
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 //To use multiple react elements we use [ ]
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <App title='The App Card'/>
     </React.StrictMode>,
     document.getElementById('root')
 );
