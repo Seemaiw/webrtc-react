@@ -25,9 +25,19 @@ const CardList = (props) => (
     //pass the data using spread
     <div className="profile" style={{margin: '1rem'}}>
         <h3>User Profile Info Detail</h3>
-        {testData.map(profile => <Card {...profile}/>)}
+        {props.profiles.map(profile => <Card {...profile}/>)}
     </div>
 )
+
+class Form extends React.Component {
+    render() {
+        return (
+            <form action="">
+                <input type='text' placeholder='New Username'/>
+                <button>Add New Card</button>
+            </form>)
+    }
+}
 
 class Card extends React.Component {
     render() {
@@ -62,7 +72,8 @@ function App({title}) {
             <Button onClickFunction={incrementCounter} increment={100}/>
             <Display message={counter}/>
             <h1 className="header">{title}</h1>
-            <CardList/>
+            <Form/>
+            <CardList profiles={testData}/>
         </div>
         // We can also use a special object to enclose multiple elements without introducing a new div parent which is
         //react.fragment but no new DOM parent will be introduced
